@@ -1,0 +1,36 @@
+{
+  "name": "dataloader",
+  "version": "0.0.1",
+  "description": "offline data support with or without service workers",
+  "main": "'dist/dataloaders.js'",
+  "scripts": {
+    "test": "'test'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cjwadair/dataloader.git"
+  },
+  "keywords": [
+    "offline",
+    "appcache",
+    "service worker"
+  ],
+  "author": "Chris Adair <cjwadair@gmail.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/cjwadair/dataloader/issues"
+  },
+  "homepage": "https://github.com/cjwadair/dataloader#readme",
+  "dependencies": {
+    "localforage": "1.4.3"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "6.22.0",
+    "babelify": "7.3.0",
+    "browserify": "14.0.0",
+    "gulp": "3.9.1",
+    "gulp-uglify": "2.0.1",
+    "vinyl-buffer": "1.0.0",
+    "vinyl-source-stream": "1.1.0"
+  }
+}
