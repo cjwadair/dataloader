@@ -11,9 +11,13 @@ function buildScript(scriptName) {
 		cache: {},
 		packageCache: {}
 	});
-	b.transform(babelify, {
+	b
+	.transform(babelify, {
 		presets: ['es2015']}
-	);
+	)
+	.transform({
+          global: true
+      }, 'uglifyify');
 	b.bundle()
     .on('error', function (err) { console.error(err); })
     .pipe(source(scriptName))
