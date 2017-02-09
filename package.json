@@ -1,5 +1,5 @@
 {
-  "name": "dataloader",
+  "name": "offline-dataloader",
   "version": "0.0.1",
   "description": "offline data support with or without service workers",
   "main": "'dist/dataloaders.js'",
@@ -18,9 +18,9 @@
   "author": "Chris Adair <cjwadair@gmail.com>",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/cjwadair/dataloader/issues"
+    "url": "https://github.com/cjwadair/offline-dataloader/issues"
   },
-  "homepage": "https://github.com/cjwadair/dataloader#readme",
+  "homepage": "https://github.com/cjwadair/offline-dataloader#readme",
   "dependencies": {
     "localforage": "1.4.3"
   },
