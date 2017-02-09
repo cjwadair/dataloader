@@ -3,7 +3,7 @@
 	WORKS INSIDE SERVICE WORKER 
 */
 
-var idbManager = require('./utils/dataloader-cache-expiration');
+var idbManager = require('../src/utils/dataloader-cache-expiration');
 
 var storageInstances = {};
 
