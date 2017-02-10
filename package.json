@@ -1,6 +1,6 @@
 {
   "name": "offline-dataloader",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "offline data support with or without service workers",
   "main": "dist/dataloaders.js",
   "scripts": {
@@ -21,8 +21,7 @@
     "url": "https://github.com/cjwadair/offline-dataloader/issues"
   },
   "homepage": "https://github.com/cjwadair/offline-dataloader#readme",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "babel-plugin-transform-es2015-modules-umd": "6.22.0",
     "babel-preset-es2015": "6.22.0",
