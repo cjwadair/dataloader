@@ -4,6 +4,7 @@ var browserify = require('browserify');
 var buffer = require('vinyl-buffer');
 var source = require('vinyl-source-stream');
 var uglify = require('gulp-uglify');
+var del = require('del');
 
 function buildScript(scriptName) {
 	var path = 'src/' + scriptName;
@@ -11,13 +12,12 @@ function buildScript(scriptName) {
 		cache: {},
 		packageCache: {}
 	});
-	b
-	.transform(babelify, {
+	b.transform(babelify, {
 		presets: ['es2015']}
 	)
-	.transform({
-          global: true
-      }, 'uglifyify');
+	// .transform({
+ //          global: true
+ //      }, 'uglifyify');
 	b.bundle()
     .on('error', function (err) { console.error(err); })
     .pipe(source(scriptName))
@@ -33,7 +33,14 @@ function buildScripts(scripts) {
 	}
 }
 
-gulp.task('default', function(){
+gulp.task('copy-utils', function() {
+	del('dist/*', {dot: true});
+	gulp.src('src/utils/*.js', {
+		base: 'src'
+	}).pipe(gulp.dest('dist'));
+});
+
+gulp.task('default', ['copy-utils'], function(){
 	var scripts = ['dataloaders.js', 'sw-dataloaders.js'];
 	buildScripts(scripts);
 });

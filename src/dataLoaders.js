@@ -1,16 +1,6 @@
 /* eslint-disable */
 'use strict';
 
- // if ('serviceWorker' in navigator && (window.location.protocol === 'https:') && window.location.port != '3000') { 
- // 	console.debug('service worker!');
- // } else {
- // 	console.debug('NO service worker');
- // }
-
-
-// HAD TO CONVERT FROM USING IMPORT ON NODE MODULES TO 
-// USING REQUIRE BECAUSE OF ERROR IN THE DIST FOLDER
-// NEED TO FIGURE OUT WHY AND FIX AT SOME POINT
 var localforage = require('localforage');
 
 var storageInstances = {};
@@ -68,7 +58,6 @@ function setStorageInstance(data) {
 	});
 	storageInstances[cache.cacheName] = instance;
 }
-
 
 export function cacheFirst(url, cacheName, cacheKey) {
 	return requestFromCache(cacheName, cacheKey).then(function(response){
@@ -243,7 +232,6 @@ export function loadImage(element, cacheName, loadAsBgImg=false) {
 */
 export function cacheFile(url) {
 		requestFromNetwork(url, 'staticFileStore').then(function(){
-			// console.log(`${url} has been added to the staticFileCache`);
 		})
 }
 
@@ -372,7 +360,6 @@ export function requestFromNetwork(url, cacheName, shouldCache=true) {
     };
 
     request.open('GET', url, true);
-    // request.setRequestHeader('Cache-Control', 'max-age:31536000 no-cache');
     request.responseType = responseType; 
     request.send();
   });
@@ -512,21 +499,15 @@ function manageCacheSize(cacheName) {
 			let entriesOverLimit = numberOfEntries - cacheInstance._config.maxEntries;
 			let itemArray = [];
 			if (entriesOverLimit > 0){
-				cacheInstance.iterate(function(value) {
-					// if (key == 4 || key == 7) {
-					// 	value.dataloaderExpiryTime = value.dataloaderExpiryTime - 1000;
-					// }
-					
+				cacheInstance.iterate(function(value) {					
 					itemArray.push(value);	
 				}).then(function() {
 					// sorts the items into ascending order by expiry data (closest expiry first)
 					itemArray.sort(function (a, b) {
 					if (a.dataloaderExpiryTime > b.dataloaderExpiryTime) {
-					// if (a.id > b.id) {
 						return 1;
 					}
 					if (a.dataloaderExpiryTime < b.dataloaderExpiryTime) {
-					// if (a.id < b.id) {
 						return -1;
 					}
 					// a must be equal to b

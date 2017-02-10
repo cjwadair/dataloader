@@ -3,7 +3,7 @@
 	WORKS INSIDE SERVICE WORKER 
 */
 
-var idbManager = require('../src/utils/dataloader-cache-expiration');
+var idbManager = require('./utils/dataloader-cache-expiration');
 
 var storageInstances = {};
 
@@ -47,7 +47,6 @@ function swCheckCacheParams(url) {
 		let matchingStorageInstance = false;
 		instance.url.filter(function(expression){
 			if(url.match(expression)){
-				// console.debug('regex match FOUND', url, instance.cacheName);
 				matchingStorageInstance = true;
 				return;
 			}
@@ -84,13 +83,9 @@ function swProcessRequest(event, params) {
 						return resolve(formatResponse(requestType, response));
 					}
 					console.warn('swProcessRequest did not resolve. throwing error now', event.request.url);
-					// return resolve();
 					throw Error;
-					// throw Error;
 			}).catch(function(error){
 				console.info('swProcessRequest rejecting', event.request.url);
-				// Error('error in swProcessRequest: ', error, event.request.url);
-				// throw error;
 				return reject(error);
 			});
 	});
@@ -201,7 +196,6 @@ function swNetworkFirst(event, cacheParams) {
 					return reject();
 				}
 			});
-		// }, cacheParams.timeoutInSeconds * 1000); 	
 		}, 1500);
 	});
 
@@ -242,9 +236,6 @@ function swNetworkFirst(event, cacheParams) {
 		.then(function(response){
 			return response;
 		});
-		// .catch(function(error){
-		// 	return reject(error);
-		// });
 }
 
 function swNetworkOnly(event, cacheParams){
@@ -292,21 +283,11 @@ function swFastest(event, cacheParams) {
 
 function swRequestFromNetwork(event, cacheParams, shouldCacheData=true) {
 	return new Promise(function(resolve, reject){
-
-		// let myHeaders = new Headers();
-		// myHeaders.append("Cache-Control", "max-age=31536000");
-
-		// let myInit = { method: 'GET',
-  //              headers: myHeaders,
-  //              mode: 'cors',
-  //              cache: 'default' };
-
 		fetch(event.request)
 		.then(function(response){
 			console.debug('swRequestFromNetwork: network request responded with: ', event.request.url, response.headers, response.headers.get("Content-Type"));
 			caches.open(cacheParams.cacheName)
-				.then(function(cache) {				
-				// caches.open(event.request.url).then(function(cache) {				
+				.then(function(cache) {					
 					if(shouldCacheData && event.request.method === 'GET'){				
 						cache.add(event.request.url).then(function(){
 							console.debug('swRequestFromNetwork: network item added to cache', event.request.url);
