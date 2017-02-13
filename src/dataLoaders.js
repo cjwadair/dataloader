@@ -6,7 +6,7 @@ var localforage = require('localforage');
 var storageInstances = {};
 
 var requestHandlers = {
-  "networkFirst": networkFirst,
+	"networkFirst": networkFirst,
   "cacheFirst": cacheFirst,
   "fastest": fastest,
   "networkOnly": networkOnly,
