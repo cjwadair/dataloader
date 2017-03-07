@@ -1,5 +1,13 @@
+
 /* eslint-disable */
 'use strict';
+
+/*  
+*******************************************************************************************
+NOT IN USE RIGHT NOW. THIS FUNCTIONALITY HAS BEEN MOVED INTO THE WEB START KIT DIRECTLY
+*******************************************************************************************
+*/
+
 
 /* 
 	THIS IS OBSERVER FOR ANY ELEMENT ADDED EVENTS THE USER WANTS TO INTERCEPT. 
