@@ -1,4 +1,5 @@
 'use strict';
+require('babel-core/register');
 
 var gulp = require('gulp');
 var babelify = require('babelify');
@@ -8,36 +9,29 @@ var buffer = require('vinyl-buffer');
 var source = require('vinyl-source-stream');
 var uglify = require('gulp-uglify');
 var del = require('del');
+var mocha = require('gulp-mocha');
 import sourcemaps from 'gulp-sourcemaps';
+
 
 function buildScript(scriptName) {
 	let path = './src/' + scriptName;
 	let b = browserify(path, {
-		cache: {},
-		packageCache: {},
+		// cache: {},
+		// packageCache: {},
 		standalone: 'dataloaders',
 		debug: true
 	});
 	b = b.transform(babelify, {
 		presets: ['es2015']
 	});
-	// .plugin('bundle-collapser/plugin');
-
- 
-    return b.bundle()
-    	.pipe(source(scriptName))
-    	.on('error', function (err) { console.error(err); })
-  	// return gulp.src(path)
-      .pipe(buffer())
-      .pipe(sourcemaps.init({loadMaps: true}))
-      // .pipe(babel({
-      //   presets: ['es2015']
-      // }))
-      .pipe(uglify())
-  		.pipe(sourcemaps.write('./maps'))
-      .pipe(gulp.dest('dist'))
-  // }
-  // return bundle();
+  return b.bundle()
+  	.pipe(source(scriptName))
+  	.on('error', function (err) { console.error(err); })
+    .pipe(buffer())
+    .pipe(sourcemaps.init({loadMaps: true}))
+    .pipe(uglify())
+		.pipe(sourcemaps.write('./maps'))
+    .pipe(gulp.dest('dist'))
 }
 
 function buildScripts(scripts) {
@@ -55,10 +49,25 @@ function copyUtils() {
 
 gulp.task('clearDist', function(){
 	del('dist', {dot: true});
+	del('dist/utils/*');
 })
 
 gulp.task('default', ['clearDist'], function(){
 	copyUtils();
 	var scripts = ['dataloaders.js', 'sw-dataloaders.js'];
 	buildScripts(scripts);
+});
+
+
+
+gulp.task('test', function() {
+  // return gulp.src(['test/*.js'])
+   //  .pipe(mocha({
+   //    compilers:babelregister
+  	// }));
+  	return gulp.src('test/*.test.js', { read: false })
+      .pipe(mocha({
+      	reporter: 'nyan',
+      	compilers:'js:babel-core/register'
+  	}));
 });

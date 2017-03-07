@@ -46,6 +46,9 @@ function swCheckCacheParams(url) {
 		let instance = storageInstances[key];
 		let matchingStorageInstance = false;
 		instance.url.filter(function(expression){
+			if (typeof expression == 'string') {
+				expression = '^' + expression + '$';
+			} 
 			if(url.match(expression)){
 				matchingStorageInstance = true;
 				return;

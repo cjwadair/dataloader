@@ -1,0 +1,22 @@
+{
+	"users": [
+		{
+			"id": 0,
+			"name": "joe"
+		},
+		{
+			"id": 1,
+			"name": "ted"
+		}
+	], 
+	"resources": [
+		{
+			"id": 0,
+			"name": "data service"
+		},
+		{
+			"id": 1,
+			"name": "http service"
+		}
+	]
+}
