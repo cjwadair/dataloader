@@ -1,19 +1,23 @@
-# Dataloader
+# Offline-dataloader
 
-### NOTE: THIS LIBRARY IS IN ACTIVE DEVELOPMENT AND BREAKING CHANGES ARE POSSIBLE AT ANY TIME. ITS ALSO POSSIBLE THAT THE README CONTENT BELOW IS NOT 100% ACCURATE
+#### NOTE: THIS LIBRARY IS IN ACTIVE DEVELOPMENT AND BREAKING CHANGES ARE POSSIBLE AT ANY TIME. ITS ALSO POSSIBLE THAT THE README CONTENT BELOW IS NOT 100% ACCURATE
 
-Offline-dataloader is a tool for managing cached data in your web apps. Using [localforage](https://github.com/localForage/localForage) as a backend it simplifies the task of implementing caching strategies for API calls, 3rd Party resources and infrequently changing local resources that you want to cache. 
+Offline-dataloader is a Javascript library that wraps the [localforage](https://github.com/localForage/localForage) library in a series of simple helpers that dramatically simplify the process of setting up and managing offline data storage for your website or web application. 
 
-The goal of the project is to provide a similar functionality to the [sw-toolbox](https://github.com/GoogleChrome/sw-toolbox) library for browsers that do not support service workers or in cases where implmenting a service worker might not make sense. 
+Key features of the libary include: 
+
+* Works with [localforage](https://github.com/localForage/localForage), so it supports offline storage cross-browser using IndexDb, webSQL, and localStorage thorugh a simple localStorage-like API.
+* Supports all modern browsers from ie8 and up and mobile browsers from Safari 3.1 and Android 2.1 (complete list to follow...)
+* Provides simple helpers for implementing cache management strategies that cover most use cases. See Jake Archibald's excellent article, [The Offline Cookbook](https://jakearchibald.com/2014/offline-cookbook/) for more information on the various strategies available.
+* Provides configuration options that simplify cache management and cache expiration tasks
 
 
-* Works with IndexDb, webSQL, and localstorage
-* Supports all modern browsers from ie8 and up (and possibly beyond but that hasn't been fully tested).
-* Provides a simple but powerful API for implementing offline support and caching strategies
+Offline-dataloader is similar in its features to Google's [sw-toolbox](https://github.com/GoogleChrome/sw-toolbox) library with the exception that offline-dataloader does not require (or support) Service Workers. As such it could be used as a stand-alone alternative to sw-toolbox or paired with it for a best of both worlds solution that leverages the advantages of a service worker when available but still supports offline storage where they are not (an example of this is in the works...). 
 
-Offline-dataloader does not support service workers (intentionally), but it does pair nicely with the google sw-toolbox library or it can be used with the sw-dataloaders library for implementations that use service workers when available but still work on browsers that do not. 
 
 #Installation
+
+[download from github](https://github.com/cjwadair/offline-dataloader) or install using npm:
 
 `npm install offline-dataloader --save`
 
@@ -57,7 +61,7 @@ dataloaders.setStorageInstances(cacheParams);
 
 ###Making data requests
 
-Offline-dataloader supports the 5 caching strategies outlined in Jake Archibald's excellent Offline Cookbook (make this a link...):
+Offline-dataloader supports the 5 caching strategies outlined in Jake Archibald's excellent [Offline Cookbook](https://jakearchibald.com/2014/offline-cookbook/):
 
 * Cache First - tries the cache first and fallsback to a network request if that fails
 * Network First - tries a network request first and falls back to the cache if that fails
