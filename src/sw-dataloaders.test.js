@@ -3,20 +3,20 @@ var expect = chai.expect;
 var td = require('testdouble');
 var requestHandlers, dataloaders;
 
-describe('dataloader test', function(){
+// describe('dataloader test', function(){
 
-	beforeEach(function(){
-		?requestHandlers = td.replace('./utils/requestHandlers.js');
-		dataloaders = require('./sw-dataloaders.js');
-	});
+// 	beforeEach(function(){
+// 		requestHandlers = td.replace('./utils/requestHandlers.js');
+// 		dataloaders = require('./sw-dataloaders.js');
+// 	});
 
-	beforeEach(function(){
-	});
+// 	beforeEach(function(){
+// 	});
 
 
-	afterEach(function(){
-	  td.reset();
-	});
+// 	afterEach(function(){
+// 	  td.reset();
+// 	});
 
 	// describe('setStorageInstances', function(){
 	// 	it('should call reqestHandlers.setStorageInstances when called', function(){

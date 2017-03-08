@@ -178,7 +178,7 @@ function requestFromCache(cacheName, cacheKey) {
 						}
 						return reject();
 					}).catch(function(err) {
-						return reject(Error(`requestFromCache: getAllItems errored out: ${err}`));
+						return reject(new Error(`requestFromCache: getAllItems errored out: ${err}`));
 					});
 				} else {
 					// Resolve to nothing so that cache requests can handle responses without a result correctly

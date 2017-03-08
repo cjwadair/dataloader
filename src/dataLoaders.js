@@ -27,8 +27,18 @@ function cacheFirst(url, cacheName, cacheKey) {
 			if(response) {
 				return resolve(response);
 			} 
-			return reject(new Error('error returning from the cache'));
+			// Call to the network if the cache exists but is empty
+			return dataHandlers.requestFromNetwork(url, cacheName)
+				.then(function(response){
+					if(response) {
+						return resolve(response); 
+					}
+				})
+				.catch(function(error){
+					return reject(new Error(error));
+				});
 		}).catch(function(error){
+			// Call to the network in the event of an error retrieving data from the cache
 			var dataFromNetwork = dataHandlers.requestFromNetwork(url, cacheName)
 				.then(function(response){
 					if(response) {
